@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.disastermis.controller.FieldOfficerDashboardController"
+            styleClass="main-root">
+    <top>
+        <HBox styleClass="topbar" spacing="20" alignment="CENTER_LEFT">
+            <Label text="🛡 ResQNet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" styleClass="user-label"/>
+            <Label text="[ FIELD OFFICER ]" styleClass="role-badge-field"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="btn-secondary"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabpane">
+
+            <Tab text="🚒 Team Status" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <Label text="Rescue Team Overview" styleClass="section-title"/>
+                    <TableView fx:id="teamTable" prefHeight="250" styleClass="data-table"/>
+                    <Label text="Assignment History" styleClass="section-title"/>
+                    <TableView fx:id="assignmentTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="📋 Activity Logs" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <Label text="Team Activity Logs" styleClass="section-title"/>
+                    <TableView fx:id="activityTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <TextField fx:id="outcomeSummaryField" promptText="Outcome summary..." prefWidth="400" styleClass="input-field"/>
+                        <Button text="Mark Complete" onAction="#handleMarkActivityComplete" styleClass="btn-success"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="🏥 Hospital Coordination" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Hospital Capacity" styleClass="section-title"/>
+                    <TableView fx:id="hospitalTable" prefHeight="220" styleClass="data-table"/>
+
+                    <TitledPane text="Create Patient Record" expanded="false">
+                        <GridPane hgap="12" vgap="10" styleClass="form-grid">
+                            <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                            <TextField fx:id="patFirstName" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="input-field"/>
+                            <Label text="Last Name:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                            <TextField fx:id="patLastName" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="input-field"/>
+                            <Label text="Age:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                            <TextField fx:id="patAge" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="input-field"/>
+                            <Label text="Gender:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                            <ComboBox fx:id="patGender" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="combo-field"/>
+                            <Label text="Condition:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                            <TextField fx:id="patCondition" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="3" styleClass="input-field"/>
+                            <Button text="Create Patient" onAction="#handleCreatePatient" styleClass="btn-primary"
+                                    GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+                        </GridPane>
+                    </TitledPane>
+
+                    <Label text="Admit Patient" styleClass="section-title"/>
+                    <TableView fx:id="patientTable" prefHeight="150" styleClass="data-table"/>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="admitHospital" promptText="Select hospital" prefWidth="250" styleClass="combo-field"/>
+                        <ComboBox fx:id="admitReport"   promptText="Link to report (optional)" prefWidth="250" styleClass="combo-field"/>
+                        <Button text="Admit Selected Patient" onAction="#handleAdmitPatient" styleClass="btn-primary"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab text="📋 Request Approval" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Submit Approval Request" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Request Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="requestType" promptText="Select type" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="combo-field"/>
+                        <Label text="Remarks:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextArea fx:id="requestRemarks" promptText="Describe your request..."
+                                  GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"
+                                  prefHeight="100" styleClass="input-field"/>
+                        <Button text="Submit Request" onAction="#handleSubmitRequest" styleClass="btn-primary"
+                                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    </GridPane>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

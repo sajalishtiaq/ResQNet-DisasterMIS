@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.disastermis.controller.FinanceDashboardController"
+            styleClass="main-root">
+    <top>
+        <HBox styleClass="topbar" spacing="20" alignment="CENTER_LEFT">
+            <Label text="🛡 ResQNet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" styleClass="user-label"/>
+            <Label text="[ FINANCE OFFICER ]" styleClass="role-badge-finance"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="btn-secondary"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabpane">
+
+            <Tab text="💰 Transactions" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <HBox spacing="24">
+                        <VBox styleClass="stat-card-green" prefWidth="220" prefHeight="80" alignment="CENTER" spacing="4">
+                            <Label text="Total Donations (Approved)" styleClass="stat-label"/>
+                            <Label fx:id="totalDonationsLabel" text="PKR 0" styleClass="stat-value-sm"/>
+                        </VBox>
+                        <VBox styleClass="stat-card-red" prefWidth="220" prefHeight="80" alignment="CENTER" spacing="4">
+                            <Label text="Total Expenses (Approved)" styleClass="stat-label"/>
+                            <Label fx:id="totalExpensesLabel" text="PKR 0" styleClass="stat-value-sm"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="Financial Transactions" styleClass="section-title"/>
+                    <TableView fx:id="txnTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="📊 Budget Analysis" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <Label text="Event Budget vs Expenditure" styleClass="section-title"/>
+                    <TableView fx:id="budgetTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="➕ Record Transaction" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Record New Financial Transaction" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="txnTypeBox" promptText="Select type" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="combo-field"/>
+                        <Label text="Amount (PKR):" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="amountField" promptText="e.g. 50000.00" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="input-field"/>
+
+                        <Label text="Donor:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="donorBox" promptText="Select donor" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200" styleClass="combo-field"/>
+                        <Label text="Supplier:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="supplierBox" promptText="Select supplier" GridPane.columnIndex="3" GridPane.rowIndex="1" prefWidth="200" styleClass="combo-field"/>
+
+                        <Label text="Event:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                        <ComboBox fx:id="eventBox" promptText="Link to event" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200" styleClass="combo-field"/>
+
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="field-label"/>
+                        <TextField fx:id="descField" promptText="Transaction description..."
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3" styleClass="input-field"/>
+
+                        <Button text="Submit Transaction" onAction="#handleRecordTransaction" styleClass="btn-primary"
+                                GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                    </GridPane>
+                    <Label text="Note: Transactions are submitted as Pending and require Administrator approval." styleClass="hint-label"/>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

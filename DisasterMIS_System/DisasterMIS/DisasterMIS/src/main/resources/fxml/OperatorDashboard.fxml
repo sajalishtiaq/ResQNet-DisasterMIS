@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.disastermis.controller.OperatorDashboardController"
+            styleClass="main-root">
+    <top>
+        <HBox styleClass="topbar" spacing="20" alignment="CENTER_LEFT">
+            <Label text="🛡 ResQNet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" styleClass="user-label"/>
+            <Label text="[ EMERGENCY OPERATOR ]" styleClass="role-badge-operator"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="btn-secondary"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabpane">
+
+            <!-- OVERVIEW -->
+            <Tab text="📊 Dashboard" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <HBox spacing="16">
+                        <VBox styleClass="stat-card-red" prefWidth="180" prefHeight="90" alignment="CENTER" spacing="6">
+                            <Label text="Pending Reports" styleClass="stat-label"/>
+                            <Label fx:id="pendingLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                        <VBox styleClass="stat-card-orange" prefWidth="180" prefHeight="90" alignment="CENTER" spacing="6">
+                            <Label text="Active (In Progress)" styleClass="stat-label"/>
+                            <Label fx:id="activeLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                        <VBox styleClass="stat-card-dark" prefWidth="180" prefHeight="90" alignment="CENTER" spacing="6">
+                            <Label text="Critical Reports" styleClass="stat-label"/>
+                            <Label fx:id="criticalLabel" text="0" styleClass="stat-value"/>
+                        </VBox>
+                    </HBox>
+                    <Label text="Active Emergency Reports" styleClass="section-title"/>
+                    <TableView fx:id="reportsTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                    <HBox spacing="12">
+                        <Button text="Mark Resolved" onAction="#handleMarkResolved" styleClass="btn-success"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- SUBMIT REPORT -->
+            <Tab text="📝 Submit Report" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Submit Emergency Report" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Latitude:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="latField" promptText="e.g. 24.8607" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="input-field"/>
+                        <Label text="Longitude:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="lonField" promptText="e.g. 67.0011" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="input-field"/>
+
+                        <Label text="Disaster Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="disasterTypeBox" promptText="Select" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="combo-field"/>
+                        <Label text="Severity:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="severityBox" promptText="Select" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="combo-field"/>
+
+                        <Label text="Citizen:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                        <ComboBox fx:id="citizenBox" promptText="Select citizen (optional)" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="combo-field" prefWidth="200"/>
+                        <Label text="Event:" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="field-label"/>
+                        <ComboBox fx:id="eventBox" promptText="Link to event (optional)" GridPane.columnIndex="3" GridPane.rowIndex="2" styleClass="combo-field" prefWidth="200"/>
+
+                        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="field-label"/>
+                        <TextField fx:id="descField" promptText="Describe the emergency..." GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                   GridPane.columnSpan="3" styleClass="input-field"/>
+
+                        <Button text="Submit Report" onAction="#handleSubmitReport" styleClass="btn-primary"
+                                GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                    </GridPane>
+                </VBox>
+            </Tab>
+
+            <!-- ASSIGN TEAM -->
+            <Tab text="🚒 Assign Team" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Rescue Teams" styleClass="section-title"/>
+                    <TableView fx:id="teamTable" prefHeight="300" styleClass="data-table"/>
+                    <HBox spacing="16" alignment="CENTER_LEFT">
+                        <Label text="Assign Team to selected report:" styleClass="field-label"/>
+                        <ComboBox fx:id="teamAssignBox" promptText="Select available team" prefWidth="300" styleClass="combo-field"/>
+                        <Button text="Assign Team" onAction="#handleAssignTeam" styleClass="btn-primary"/>
+                    </HBox>
+                    <Label text="Note: First select a report from Dashboard tab, then assign." styleClass="hint-label"/>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

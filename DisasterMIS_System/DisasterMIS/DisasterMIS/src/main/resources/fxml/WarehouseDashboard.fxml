@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.disastermis.controller.WarehouseDashboardController"
+            styleClass="main-root">
+    <top>
+        <HBox styleClass="topbar" spacing="20" alignment="CENTER_LEFT">
+            <Label text="🛡 ResQNet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" styleClass="user-label"/>
+            <Label text="[ WAREHOUSE MANAGER ]" styleClass="role-badge-warehouse"/>
+            <Label fx:id="lowStockCountLabel" styleClass="low-stock-badge"/>
+            <Button text="Refresh" onAction="#handleRefresh" styleClass="btn-secondary"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabpane">
+
+            <Tab text="📦 Inventory" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <Label text="Full Inventory Summary" styleClass="section-title"/>
+                    <TableView fx:id="inventoryTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="⚠ Low Stock" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <Label text="Low Stock Alert Items" styleClass="section-title"/>
+                    <TableView fx:id="lowStockTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="🚚 Allocate Resource" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Allocate Resource to Event" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Resource:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="allocResourceBox" promptText="Select resource" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="250" styleClass="combo-field"/>
+                        <Label text="Warehouse:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="allocWarehouseBox" promptText="Select warehouse" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="200" styleClass="combo-field"/>
+                        <Label text="Event:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <ComboBox fx:id="allocEventBox" promptText="Link to event" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="250" styleClass="combo-field"/>
+                        <Label text="Quantity:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="allocQtyField" promptText="Quantity" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="input-field"/>
+                        <Button text="Allocate Resource" onAction="#handleAllocate" styleClass="btn-primary"
+                                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    </GridPane>
+
+                    <Label text="Allocation History" styleClass="section-title"/>
+                    <TableView fx:id="allocationTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+            <Tab text="🔄 Restock" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Restock Inventory" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Resource:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="restockResourceBox" promptText="Select resource" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="250" styleClass="combo-field"/>
+                        <Label text="Warehouse:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="restockWarehouseBox" promptText="Select warehouse" GridPane.columnIndex="3" GridPane.rowIndex="0" prefWidth="200" styleClass="combo-field"/>
+                        <Label text="Add Qty:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="restockQtyField" promptText="Quantity to add" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="input-field"/>
+                        <Button text="Restock" onAction="#handleRestock" styleClass="btn-success"
+                                GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    </GridPane>
+
+                    <Label text="Add New Resource Type" styleClass="section-title"/>
+                    <GridPane hgap="12" vgap="12" styleClass="form-grid">
+                        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <TextField fx:id="resNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="input-field"/>
+                        <Label text="Type:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                        <ComboBox fx:id="resTypeBox" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="combo-field"/>
+                        <Label text="Unit:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="resUnitField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="input-field"/>
+                        <Label text="Low Threshold:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                        <TextField fx:id="resThresholdField" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="input-field"/>
+                        <Button text="Add Resource" onAction="#handleAddResource" styleClass="btn-secondary"
+                                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    </GridPane>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

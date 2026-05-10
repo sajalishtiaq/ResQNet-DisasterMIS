@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.disastermis.controller.AdminDashboardController"
+            styleClass="main-root">
+
+    <!-- TOP NAV -->
+    <top>
+        <HBox styleClass="topbar" spacing="20" alignment="CENTER_LEFT">
+            <Label text="🛡 ResQNet" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" styleClass="user-label"/>
+            <Label text="[ ADMINISTRATOR ]" styleClass="role-badge-admin"/>
+            <Button text="Refresh" onAction="#handleRefreshStats" styleClass="btn-secondary"/>
+            <Button text="Logout" onAction="#handleLogout" styleClass="btn-danger"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane styleClass="main-tabpane">
+
+            <!-- OVERVIEW TAB -->
+            <Tab text="📊 Overview" closable="false">
+                <ScrollPane fitToWidth="true">
+                    <VBox spacing="20" styleClass="tab-content">
+                        <Label text="System Overview" styleClass="section-title"/>
+                        <HBox spacing="16">
+                            <VBox styleClass="stat-card-red" prefWidth="160" prefHeight="100" alignment="CENTER" spacing="6">
+                                <Label text="Pending Reports" styleClass="stat-label"/>
+                                <Label fx:id="pendingReportsLabel" text="0" styleClass="stat-value"/>
+                            </VBox>
+                            <VBox styleClass="stat-card-orange" prefWidth="160" prefHeight="100" alignment="CENTER" spacing="6">
+                                <Label text="Active Reports" styleClass="stat-label"/>
+                                <Label fx:id="activeReportsLabel" text="0" styleClass="stat-value"/>
+                            </VBox>
+                            <VBox styleClass="stat-card-green" prefWidth="160" prefHeight="100" alignment="CENTER" spacing="6">
+                                <Label text="Teams Available" styleClass="stat-label"/>
+                                <Label fx:id="teamsAvailLabel" text="0" styleClass="stat-value"/>
+                            </VBox>
+                            <VBox styleClass="stat-card-blue" prefWidth="160" prefHeight="100" alignment="CENTER" spacing="6">
+                                <Label text="Pending Approvals" styleClass="stat-label"/>
+                                <Label fx:id="pendingApprovalsLabel" text="0" styleClass="stat-value"/>
+                            </VBox>
+                            <VBox styleClass="stat-card-dark" prefWidth="160" prefHeight="100" alignment="CENTER" spacing="6">
+                                <Label text="Critical Reports" styleClass="stat-label"/>
+                                <Label fx:id="criticalLabel" text="0" styleClass="stat-value"/>
+                            </VBox>
+                        </HBox>
+
+                        <Label text="All Emergency Reports" styleClass="section-title"/>
+                        <TableView fx:id="reportsTable" prefHeight="300" styleClass="data-table"/>
+                    </VBox>
+                </ScrollPane>
+            </Tab>
+
+            <!-- USER MANAGEMENT TAB -->
+            <Tab text="👥 User Management" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="System Users" styleClass="section-title"/>
+                    <TableView fx:id="usersTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+
+                    <TitledPane text="Create New User" expanded="true" styleClass="form-pane">
+                        <GridPane hgap="12" vgap="10" styleClass="form-grid">
+                            <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="field-label"/>
+                            <TextField fx:id="newUserName" promptText="Full Name" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="input-field"/>
+                            <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="field-label"/>
+                            <TextField fx:id="newUserEmail" promptText="Email" GridPane.columnIndex="3" GridPane.rowIndex="0" styleClass="input-field"/>
+                            <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="field-label"/>
+                            <TextField fx:id="newUserPhone" promptText="Phone Number" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="input-field"/>
+                            <Label text="Password:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="field-label"/>
+                            <TextField fx:id="newUserPassword" promptText="Initial Password" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="input-field"/>
+                            <Label text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="field-label"/>
+                            <ComboBox fx:id="newUserRole" promptText="Select Role" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="combo-field"/>
+                            <Button text="Create User" onAction="#handleCreateUser" styleClass="btn-primary"
+                                    GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                        </GridPane>
+                    </TitledPane>
+                </VBox>
+            </Tab>
+
+            <!-- APPROVALS TAB -->
+            <Tab text="✅ Approvals" closable="false">
+                <VBox spacing="16" styleClass="tab-content">
+                    <Label text="Approval Requests" styleClass="section-title"/>
+                    <TableView fx:id="approvalsTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <TextField fx:id="approvalRemarks" promptText="Decision remarks..." prefWidth="400" styleClass="input-field"/>
+                        <Button text="✅ Approve" onAction="#handleApprove" styleClass="btn-success"/>
+                        <Button text="❌ Reject"  onAction="#handleReject"  styleClass="btn-danger"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- AUDIT TAB -->
+            <Tab text="📋 Audit Trail" closable="false">
+                <VBox spacing="12" styleClass="tab-content">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <Label text="System Audit Log (Last 100 entries)" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Refresh" onAction="#handleRefreshAudit" styleClass="btn-secondary"/>
+                    </HBox>
+                    <TableView fx:id="auditTable" VBox.vgrow="ALWAYS" styleClass="data-table"/>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.disastermis.controller.LoginController"
+           styleClass="login-root">
+
+    <VBox styleClass="login-card"
+          maxWidth="400" maxHeight="460"
+          alignment="CENTER" spacing="0">
+
+        <!-- Brand Block -->
+        <VBox alignment="CENTER" spacing="5" style="-fx-padding: 0 0 22 0;">
+            <Label text="🛡" style="-fx-font-size: 44px; -fx-alignment: CENTER;"/>
+            <Label text="ResQNet" styleClass="login-title"/>
+            <Label text="Smart Disaster Response System" styleClass="login-brand"/>
+            <Label text="Pakistan National Emergency MIS" styleClass="login-subtitle"/>
+        </VBox>
+
+        <Separator/>
+
+        <!-- Email -->
+        <VBox spacing="6" style="-fx-padding: 22 0 14 0;">
+            <Label text="Email Address" styleClass="field-label"/>
+            <TextField fx:id="emailField"
+                       promptText="Enter your email address"
+                       styleClass="input-field"
+                       prefWidth="310"/>
+        </VBox>
+
+        <!-- Password -->
+        <VBox spacing="6" style="-fx-padding: 0 0 26 0;">
+            <Label text="Password" styleClass="field-label"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter your password"
+                           styleClass="input-field"
+                           prefWidth="310"/>
+        </VBox>
+
+        <!-- Sign In Button -->
+        <Button text="SIGN IN  →"
+                onAction="#handleLogin"
+                styleClass="btn-login"
+                maxWidth="Infinity"
+                prefHeight="44"/>
+
+        <!-- Footer -->
+        <Label text="© 2025 ResQNet — Disaster Response MIS"
+               styleClass="login-subtitle"
+               style="-fx-padding: 20 0 0 0;"/>
+    </VBox>
+</StackPane>
