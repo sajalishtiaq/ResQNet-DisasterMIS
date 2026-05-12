@@ -110,8 +110,8 @@ DisasterMIS/
 
 NOTES
 -----
-• Passwords are hashed using SHA-256 (matches SQL Server HASHBYTES)
+• **Passwords are hashed using SHA-256 (matches SQL Server HASHBYTES)
 • All critical operations use database triggers and stored procedures
-• System is designed for real-world disaster response scenarios
+• System is designed for real-world disaster response scenarios**
 ====================================================================
 Thank You!
