@@ -84,7 +84,7 @@ mvn clean javafx:run
 
 ## ✨ Key Features
 
-- 🧑‍💼 Role-based dashboards *(7 different interfaces)*
+- 🧑‍💼 Role-based dashboards *(5 different interfaces)*
 - 📋 Real-time Emergency Report Management
 - 🚑 Rescue Team Assignment & Tracking
 - 🏥 Hospital & Patient Management
