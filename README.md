@@ -39,7 +39,7 @@
 ### Step 1: Database Setup
 
 1. Open **SQL Server Management Studio (SSMS)**
-2. Connect to server: `LALEYKA\SQLEXPRESS`
+2. Connect to server: YOUR_SERVER
 3. Open the file `Deliverable4.sql`
 4. Execute the entire script *(Press F5)*
 
@@ -48,7 +48,7 @@
 Run the following SQL commands:
 
 ```sql
-CREATE LOGIN app_user WITH PASSWORD = 'sajal1234567';
+CREATE LOGIN app_user WITH PASSWORD = YOUR_PASSWORD;
 USE DisasterMIS;
 CREATE USER app_user FOR LOGIN app_user;
 ALTER ROLE db_datareader ADD MEMBER app_user;
